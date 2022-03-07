@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>img/kindpng_202406.png</file>
+        <file>img/kindpng_2778486.png</file>
+        <file>img/logo sprint.png</file>
+        <file>img/wallpaperflare.com_wallpaper.jpg</file>
+    </qresource>
+</RCC>
