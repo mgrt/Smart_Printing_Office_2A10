@@ -1,0 +1,1182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1101</width>
+    <height>611</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>SprintApp</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../Pictures/logo sprint.png</normaloff>../../Pictures/logo sprint.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>80</y>
+      <width>951</width>
+      <height>471</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(113, 205, 220);</string>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>40</width>
+      <height>40</height>
+     </size>
+    </property>
+    <widget class="QWidget" name="ajout">
+     <attribute name="title">
+      <string>Ajout Client</string>
+     </attribute>
+     <widget class="QPushButton" name="pb_ajouter">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>390</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color: white;
+border:15px;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 15;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 15;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Ajouter Client</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>30</y>
+        <width>611</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Saisir les informations du nouveau client</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>851</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QLineEdit" name="nom">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="label_3">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Prenom</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5" colspan="3">
+        <widget class="QLineEdit" name="prenom">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QLabel" name="label_8">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Genre</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="genre">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	
+border: 2px solid;
+border-radius: 15px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Homme</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Femme</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="4" colspan="3">
+        <widget class="QLabel" name="label_4">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Numero Telephone</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLineEdit" name="num_telephone">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="label_10">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Email</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLineEdit" name="email">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4" colspan="3">
+        <widget class="QLabel" name="label_5">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Date de naissance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="7">
+        <widget class="QDateEdit" name="date_naissance">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>CIN</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="3">
+        <widget class="QLineEdit" name="cin">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4" colspan="2">
+        <widget class="QLabel" name="label_6">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Nationalité</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="6" colspan="2">
+        <widget class="QLineEdit" name="nationalite">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <zorder>layoutWidget</zorder>
+     <zorder>pb_ajouter</zorder>
+     <zorder>label_12</zorder>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Afficher les Clients</string>
+     </attribute>
+     <widget class="QLineEdit" name="barre_recherche">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>80</y>
+        <width>401</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>20</y>
+        <width>251</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	color: rgb(255, 255, 255);
+
+}</string>
+      </property>
+      <property name="text">
+       <string>Liste Des Clients</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_supprimer">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>410</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}</string>
+      </property>
+      <property name="text">
+       <string>Supprimer Client</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_miseajour">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>410</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}</string>
+      </property>
+      <property name="text">
+       <string>Modifier Client</string>
+      </property>
+     </widget>
+     <widget class="QTableView" name="tab_client">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>911</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableView {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_recherche">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}</string>
+      </property>
+      <property name="text">
+       <string>Rechercher</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_annuler">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>80</y>
+        <width>81</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}</string>
+      </property>
+      <property name="text">
+       <string>Annuler</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>modifier Client</string>
+     </attribute>
+     <widget class="QWidget" name="layoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>120</y>
+        <width>851</width>
+        <height>261</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QLineEdit" name="nom_2">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QLabel" name="label_9">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Prenom</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5" colspan="3">
+        <widget class="QLineEdit" name="prenom_2">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" colspan="3">
+        <widget class="QLabel" name="label_11">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Genre</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="genre_2">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	
+border: 2px solid;
+border-radius: 15px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <item>
+          <property name="text">
+           <string>Homme</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Femme</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="4" colspan="3">
+        <widget class="QLabel" name="label_13">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Numero Telephone</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLineEdit" name="num_telephone_2">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <widget class="QLabel" name="label_19">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Email</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLineEdit" name="email_2">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4" colspan="3">
+        <widget class="QLabel" name="label_20">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Date de naissance</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="7">
+        <widget class="QDateEdit" name="date_naissance_2">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;</string>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_21">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>CIN</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" colspan="3">
+        <widget class="QLineEdit" name="cin_2">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4" colspan="2">
+        <widget class="QLabel" name="label_22">
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Nationalité</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="6" colspan="2">
+        <widget class="QLineEdit" name="nationalite_2">
+         <property name="styleSheet">
+          <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_24">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>10</y>
+        <width>611</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>24</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	color: rgb(255, 255, 255);
+}</string>
+      </property>
+      <property name="text">
+       <string>Modifier les informations du client choisi</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pb_modifier_2">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>400</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+color: white;
+border:15px;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 15;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 15;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Modifier Client</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>80</y>
+        <width>201</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_23">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+         </property>
+         <property name="text">
+          <string>ID CLIENT</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="idmodifc"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="label_16">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>141</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../Downloads/Employee/img/logo sprint.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_17">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1121</width>
+      <height>611</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../Downloads/Employee/img/wallpaperflare.com_wallpaper.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>20</y>
+      <width>281</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+color: black;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(41, 215, 242, 255), stop:0.666667 rgba(115, 193, 206, 255), stop:1 rgba(248, 248, 248, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 18;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;
+}
+QPushButton:hover {
+color: rgb(113, 205, 220);
+border:15px;
+background:#000000;
+}</string>
+    </property>
+    <property name="text">
+     <string>Gestion des clients</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_18">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>SPRINT</string>
+    </property>
+   </widget>
+   <zorder>label_17</zorder>
+   <zorder>label_16</zorder>
+   <zorder>tabWidget</zorder>
+   <zorder>pushButton_4</zorder>
+   <zorder>label_18</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1101</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOPTIONS">
+    <property name="title">
+     <string>OPTIONS</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionTraduction"/>
+   </widget>
+   <addaction name="menuOPTIONS"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionTraduction">
+   <property name="text">
+    <string>Traduction</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
