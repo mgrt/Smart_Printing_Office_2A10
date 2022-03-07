@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>test</class>
+ <widget class="QWidget" name="test">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>312</width>
+    <height>229</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLineEdit" name="line_nom">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>80</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="line_nom_2">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>110</y>
+     <width>161</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>150</y>
+     <width>161</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 15;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;
+}
+background-color: rgb(185, 81, 159);</string>
+   </property>
+   <property name="text">
+    <string>Connexion</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>80</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+   </property>
+   <property name="text">
+    <string>ID_Categorie</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>110</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+   </property>
+   <property name="text">
+    <string>ID_Categorie</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
