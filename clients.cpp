@@ -145,3 +145,24 @@ QSqlQueryModel * Clients::rechercher(QString rech)
 
 
 }
+
+QSqlQueryModel * Clients::trier(QString trie,QString ordre)
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+    QString select;
+    select="select * from CLIENTS order by "+trie+" "+ordre+" ";
+     model->setQuery(select);
+     model->setHeaderData(0, Qt::Horizontal, QObject::tr("id_client"));
+     model->setHeaderData(1, Qt::Horizontal, QObject::tr("nom_client"));
+     model->setHeaderData(2, Qt::Horizontal, QObject::tr("prenom_client"));
+     model->setHeaderData(3, Qt::Horizontal, QObject::tr("genre_client"));
+     model->setHeaderData(4, Qt::Horizontal, QObject::tr("num_telephone_client"));
+     model->setHeaderData(5, Qt::Horizontal, QObject::tr("email_client"));
+     model->setHeaderData(6, Qt::Horizontal, QObject::tr("cin_client"));
+     model->setHeaderData(7, Qt::Horizontal, QObject::tr("date_naissance_client"));
+     model->setHeaderData(8, Qt::Horizontal, QObject::tr("nationalite_client"));
+       return model;
+
+
+}
+

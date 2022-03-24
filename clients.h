@@ -58,6 +58,8 @@ public:
     bool modifier_client(int);
     void recuperer_client(int id,QString &nom,QString &prenom,QString &genre,QString &num,QString &email,QString &cin,QDate &date,QString &nationalite);
     QSqlQueryModel * rechercher(QString );
+    QSqlQueryModel * trier(QString trie,QString ordre);
+
 
 
 };
