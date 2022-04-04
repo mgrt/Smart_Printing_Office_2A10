@@ -25,17 +25,37 @@ bool Maintenance::ajouter()
    return query.exec();
 }
 
-QSqlQueryModel * Maintenance::afficher()
+QSqlQueryModel * Maintenance::afficher(int trie)
 {
 
 QSqlQueryModel * model=new QSqlQueryModel();
 
-model->setQuery("select * from MAINTENANCES");
+switch(trie)
+{
+case 0 :
+    model->setQuery("select M.id_maintenance , M.date_maintenance , M.description_maintenance , M.id_machine ,"
+                    "MM.nom_machine    from MAINTENANCES M , machines MM where M.id_machine=MM.id_machine order by M.date_maintenance desc");
+    break;
+case 1 :
+    model->setQuery("select M.id_maintenance , M.date_maintenance , M.description_maintenance , M.id_machine ,"
+                    "MM.nom_machine    from MAINTENANCES M , machines MM where M.id_machine=MM.id_machine order by M.id_maintenance desc");
+    break;
+case 2 :
+    model->setQuery("select M.id_maintenance , M.date_maintenance , M.description_maintenance , M.id_machine ,"
+                    "MM.nom_machine    from MAINTENANCES M , machines MM where M.id_machine=MM.id_machine order by M.id_machine desc");
+    break;
+case -1 :
+    model->setQuery("select M.id_maintenance , M.date_maintenance , M.description_maintenance , M.id_machine ,"
+                    "MM.nom_machine    from MAINTENANCES M , machines MM where M.id_machine=MM.id_machine");
+    break;
+}
+
 
 model->setHeaderData(0,Qt::Horizontal,QObject::tr("id_maintenance"));
 model->setHeaderData(1,Qt::Horizontal,QObject::tr("date_maintenance"));
 model->setHeaderData(2,Qt::Horizontal,QObject::tr("description_maintenance"));
 model->setHeaderData(3,Qt::Horizontal,QObject::tr("id_machine"));
+model->setHeaderData(4,Qt::Horizontal,QObject::tr("nom_machine"));
 
 return model;
 }
@@ -52,6 +72,8 @@ QSqlQueryModel * Maintenance::recherche_par_machine(QString id )
         if (example[i].isLetter())
             ischar=true;
     }
+
+    qDebug()<< "mohamed laatar";
 
     QString select;
     if(ischar)

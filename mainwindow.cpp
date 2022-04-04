@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+    #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "machine.h"
 #include "maintenance.h"
@@ -11,16 +11,24 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
         ui->setupUi(this);
-
         update_output_data();
         controle_de_saisie();
         ui->affichage_maintenance->setSelectionBehavior(QAbstractItemView::SelectRows);
         ui->affichage_maintenance->verticalHeader()->hide();
         ui->affichage_machine->setSelectionBehavior(QAbstractItemView::SelectRows);
-        ui->affichage_machine->verticalHeader()->hide();
-        ui->annuler->setStyleSheet("border-image:url(C:/Users/fedi1/Documents/Gestion_de_maintenance/Croix_Mundolsheim.png);");
+        //ui->affichage_machine->verticalHeader()->hide();
+        //ui->annuler->setStyleSheet("border-image:url(C:/Users/fedi1/Documents/Gestion_de_maintenance/Croix_Mundolsheim.png);");
+
+
+        ui->maps->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
+        ui->maps->show();
+
 }
 
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
 void MainWindow::controle_de_saisie()
 {
     QRegularExpression rx("^\\S*$" , QRegularExpression::CaseInsensitiveOption);
@@ -33,19 +41,74 @@ void MainWindow::controle_de_saisie()
 void MainWindow::update_output_data()
 {
 
-    ui->affichage_maintenance->setModel( M.afficher() );
+    ui->affichage_maintenance->setModel( M.afficher(trie) );
     ui->affichage_machine->setModel( MM.afficher() );
     ui->ID_machine_ajout->setModel( MM.afficher_nom() );
-    ui->id_maintenance_modif->setModel( M.afficher() );
+    ui->id_maintenance_modif->setModel(M.afficher(trie) );
     ui->id_machine_affchage_3->setModel( MM.afficher_nom() );
     ui->id_machine_modif->setModel(MM.afficher_nom());
 
 }
-
-MainWindow::~MainWindow()
+////////////////////////////////////////////////////////////////////////
+/// statistique
+///
+///
+void MainWindow::statistique()
 {
-    delete ui;
+
+    QString   nom_machines ;
+    int count ,id_machine;
+    QPieSeries *series = new QPieSeries();
+
+
+    QSqlQuery query,nom_mach ;
+    query.prepare("select count(id_maintenance),id_machine from maintenances group by id_machine order by count(id_maintenance) desc ");
+    query.exec();
+
+    while(query.next())
+    {
+        count = query.value(0).toInt();
+        id_machine =query.value(1).toInt();
+        nom_mach.prepare("select nom_machine from machines where id_machine = :id");
+        nom_mach.bindValue(":id",id_machine);
+        nom_mach.exec();
+        nom_mach.next();
+        nom_machines=nom_mach.value(0).toString();
+        series->append(nom_machines, count);
+    }
+
+    //series->setLabelsVisible();
+/*    series->setLabelsPosition(QPieSlice::LabelInsideHorizontal);
+*/
+    for(auto slice : series->slices())
+    {
+        QString nom=slice->label();
+        slice->setLabel(QString(nom+"\n%1%").arg(100*slice->percentage(), 0, 'f', 1));
+    }
+
+
+    QPieSlice *slice = series->slices().at(0);
+    //QString nom=slice->label();
+    //slice->setLabel(QString(nom+"\n%1%").arg(100*slice->percentage(), 0, 'f', 1));
+    //qInfo() << slice->percentage();
+    slice->setLabelVisible(true);
+    slice->setExploded(true);
+    slice->setPen(QPen(Qt::darkGreen, 2));
+    slice->setBrush(Qt::green);
+
+
+    QChart *chart = new QChart();
+    chart->addSeries(series);
+    //chart->legend()->setVisible(false);
+    chart->setTitle("Taux De Maintenance Par Machine ");
+    chart->setAnimationOptions(QChart::AllAnimations);
+
+
+    QChartView *chartview = new QChartView(chart);
+    chartview->setParent(ui->statistique);
 }
+
+
 
 void MainWindow::on_exit_triggered()
 {
@@ -103,12 +166,14 @@ void MainWindow::initialisation_demarage()
 {
     on_pushButton_7_clicked();
     on_pushButton_9_clicked();
-            on_pushButton_21_clicked();
-            on_pushButton_20_clicked();
+    on_pushButton_21_clicked();
+    on_pushButton_20_clicked();
     ui->tabWidget->setCurrentWidget(ui->tab_1);
-
 }
 
+////////////////////////////////////
+/// \brief MainWindow::on_pushButton_clicked
+/// ajouter une maintenance
 void MainWindow::on_pushButton_clicked()
 {
     if(ui->description_machine_ajout->toPlainText().isEmpty() || ui->ID_machine_ajout->currentText().isEmpty() )
@@ -116,11 +181,11 @@ void MainWindow::on_pushButton_clicked()
         QMessageBox::warning(this,"ATTENTION!!!" , "Veuillez remplir toutes les cases !");
     }
     else {
-        if (ui->description_machine_ajout->toPlainText().length() > 100)
+        if (ui->description_machine_ajout->toPlainText().length() > 200)
         {
             QMessageBox::critical(this,
                                   "Error",
-                                  "Veuiller saisir au maximaum 100 charactères!! ");
+                                  "Veuiller saisir au maximaum 200 charactères!! ");
         }
         else
         {
@@ -146,7 +211,9 @@ void MainWindow::on_pushButton_clicked()
         }
     }
 }
-
+////////
+/// \brief MainWindow::on_pushButton_7_clicked
+///bouton initialisation
 void MainWindow::on_pushButton_7_clicked()
 {
     ui->description_machine_ajout->setText("");
@@ -161,7 +228,9 @@ void MainWindow::warning ()
     QMessageBox::warning(this,"ERREUR!!!!!" ,"Erreur lors de Connection à la base de donnée");
 }
 
-
+////////////////////
+/// \brief MainWindow::on_pushButton_8_clicked
+/// ajouter une machine
 void MainWindow::on_pushButton_8_clicked()
 {
     if(ui->nom_ajout_machine->text().isEmpty() )
@@ -191,14 +260,18 @@ void MainWindow::on_pushButton_8_clicked()
 }
 
 
-
+////////
+/// \brief MainWindow::on_pushButton_7_clicked
+///bouton initialisation
 void MainWindow::on_pushButton_9_clicked()
 {
     ui->nom_ajout_machine->setText("");
 }
 
 
-
+////////////////////
+/// \brief MainWindow::on_pushButton_3_clicked
+///supprimer une maintenance
 
 void MainWindow::on_pushButton_3_clicked()
 {
@@ -233,7 +306,9 @@ void MainWindow::on_pushButton_3_clicked()
     }
 }
 
-
+////////////////
+/// \brief MainWindow::on_pushButton_5_clicked
+///supprimer une machine
 
 void MainWindow::on_pushButton_5_clicked()
 {
@@ -363,11 +438,11 @@ void MainWindow::on_pushButton_14_clicked()
         QMessageBox::warning(this,"ATTENTION!!!" , "Veuillez remplir toutes les cases !");
     }
     else {
-        if (ui->desc_modif->toPlainText().length() > 100 )
+        if (ui->desc_modif->toPlainText().length() > 200 )
                 {
                     QMessageBox::critical(this,
                                           "Error",
-                                          "Veuiller saisir au maximaum 100 charactères!! ");
+                                          "Veuiller saisir au maximaum 200 charactères!! ");
                 }
                 else
                 {
@@ -423,7 +498,9 @@ void MainWindow::on_pushButton_15_clicked()
 
 void MainWindow::on_annuler_clicked()
 {
-   ui->affichage_maintenance->setModel( M.afficher() );
+    trie=-1;
+    ui->comboBox->setCurrentIndex(-1);
+   ui->affichage_maintenance->setModel( M.afficher(trie) );
    ui->recherche->setText("");
 }
 
@@ -446,3 +523,109 @@ void MainWindow::on_rech_clicked()
     QString recherche = ui->recherche->text();
     ui->affichage_maintenance->setModel( M.recherche_par_machine(recherche));
 }
+
+void MainWindow::on_actionImprimmer_triggered()
+{
+    QPrinter printer;
+    //printer.setOrientation(QPrinter::Portrait);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    //printer.setPaperSize(QPrinter::A4);
+
+    QString path =QFileDialog::getSaveFileName(NULL,"Emplacement du fichier","C:/Users/fedi1/Documents/Gestion_de_maintenance/PDF/","PDF(*.pdf)");
+    if(path.isEmpty()) return;
+
+    printer.setOutputFileName(path);
+
+
+    QString strStream;
+    QTextStream out(&strStream);
+
+    const int rowCount = ui->affichage_maintenance->model()->rowCount();
+    const int columnCount = ui->affichage_maintenance->model()->columnCount();
+
+    out <<  "<html>\n"
+        "<head>\n"
+        "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+        <<  QString("<title>%1</title>\n")
+        <<  "</head>\n"
+        "<body bgcolor=#ffffff link=#5000A0>\n"
+            "<center><p><H1>SPRINT </H1></p></center>"
+            "</center><p><H1>TABLEAU DES MAINTENANCES : </H1></p></center>"
+        "<table border=1 cellspacing=0 cellpadding=2>\n";
+
+    // headers
+    out << "<thead><tr bgcolor=#f0f0f0>";
+    for (int column = 0; column < columnCount; column++)
+        if (!ui->affichage_maintenance->isColumnHidden(column))
+            out << QString("<th>%1</th>").arg(ui->affichage_maintenance->model()->headerData(column, Qt::Horizontal).toString());
+    out << "</tr></thead>\n";
+
+    // data table
+    for (int row = 0; row < rowCount; row++) {
+        out << "<tr>";
+        for (int column = 0; column < columnCount; column++) {
+            if (!ui->affichage_maintenance->isColumnHidden(column)) {
+                QString data = ui->affichage_maintenance->model()->data(ui->affichage_maintenance->model()->index(row, column)).toString();
+                out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+            }
+        }
+        out << "</tr>\n";
+    }
+    out <<  "</table>\n"
+        "</body>\n"
+        "</html>\n";
+
+    QTextDocument *document = new QTextDocument();
+    document->setHtml(strStream);
+    document->print(&printer);
+
+
+
+
+}
+
+
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    switch(index)
+    {
+    case 0 :
+        trie = index;
+        break;
+    case 1 :
+        trie = index;
+        break;
+    case 2 :
+        trie = index;
+        break;
+    }
+    update_output_data();
+}
+
+
+void MainWindow::on_Imprimer_clicked()
+{
+    on_actionImprimmer_triggered();
+}
+
+
+void MainWindow::on_tabWidget_tabBarClicked(int index)
+{
+
+    if(index==3)
+            statistique();
+}
+
+
+void MainWindow::on_recherche_textChanged(const QString &arg1)
+{
+    //QString recherche = ui->recherche->text();
+    if(arg1.isEmpty())
+    {
+        on_annuler_clicked();
+    }
+    else
+    ui->affichage_maintenance->setModel( M.recherche_par_machine(arg1));
+}
+

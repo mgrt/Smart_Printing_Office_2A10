@@ -45,7 +45,7 @@ public:
      QSqlQueryModel * recherche_par_machine(QString id );
      bool ajouter();
      bool supprimer(int id);
-     QSqlQueryModel * afficher();
+     QSqlQueryModel * afficher(int);
      void afficher_une_maintenances(int id,int &id_machine ,QDate &date,QString &desc);
      bool modifier_maintenances(int id );
 

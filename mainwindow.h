@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-
+#include <QQuickView>
 #include "maintenance.h"
 #include "machine.h"
 #include <QVariant>
@@ -15,6 +15,15 @@
 #include <QSqlQueryModel>
 #include<QDebug>
 #include <QRegExpValidator>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QTextDocument>
+#include <QFileDialog>
+#include<QtCharts>
+#include<QChartView>
+#include<QPieSeries>
+#include<QPieSlice>
+#include<QSslSocket>
 
 
 QT_BEGIN_NAMESPACE
@@ -34,6 +43,7 @@ public:
     void update_output_data();
     void warning ();
     void controle_de_saisie();
+    void statistique();
 private slots:
     void on_exit_triggered();
 
@@ -87,9 +97,21 @@ private slots:
 
     void on_rech_clicked();
 
+    void on_actionImprimmer_triggered();
+
+    void on_comboBox_currentIndexChanged(int index);
+
+    void on_Imprimer_clicked();
+
+    void on_tabWidget_tabBarClicked(int index);
+
+    void on_recherche_textChanged(const QString &arg1);
+
 private:
+    int trie=-1 ;
     Maintenance M ;
     Machine MM ;
     Ui::MainWindow *ui;
+    QQuickView *qmlView;
 };
 #endif // MAINWINDOW_H
