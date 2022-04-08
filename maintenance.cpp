@@ -73,8 +73,6 @@ QSqlQueryModel * Maintenance::recherche_par_machine(QString id )
             ischar=true;
     }
 
-    qDebug()<< "mohamed laatar";
-
     QString select;
     if(ischar)
     {
