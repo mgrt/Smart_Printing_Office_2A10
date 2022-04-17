@@ -161,25 +161,11 @@ bool Employe::recherche_cin(int x)
 }
 
 
-QSqlQueryModel* Employe::recherche(QString mot)
+QSqlQueryModel* Employe::recherche(QString rech)
  {
-
-    QSqlQuery *query= new QSqlQuery();
      QSqlQueryModel* model = new QSqlQueryModel();
+     model->setQuery("select * from employee where cin like '"+rech+"%' or prenom like '"+rech+"%'  or nom like '"+rech+"%' or adresse like '"+rech+"%' or email like '"+rech+"%' or nationalite like '"+rech+"%' or num_telephone like '"+rech+"%' or role like '"+rech+"%' or mdp like '"+rech+"%' ;");
 
-      query->prepare("SELECT* FROM employee WHERE cin=:cin or nom=:nom or prenom=:prenom or role=:role or adresse=:adresse or num_telephone=:num_telephone or nationalite=:nationalite or mdp=:mdp or email=:email");
-      query->bindValue(":cin",mot);
-      query->bindValue(":nom",mot);
-      query->bindValue(":prenom",mot);
-      query->bindValue(":role",mot);
-      query->bindValue(":adresse",mot);
-      query->bindValue(":num_telephone",mot);
-      query->bindValue(":nationalite",mot);
-      query->bindValue(":mdp",mot);
-      query->bindValue(":email",mot);
-      query->exec();
-
-      model->setQuery(*query);
       model->setHeaderData(0, Qt::Horizontal, QObject::tr("CIN"));
       model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
       model->setHeaderData(2, Qt::Horizontal, QObject::tr("Prenom"));
@@ -192,6 +178,7 @@ QSqlQueryModel* Employe::recherche(QString mot)
       model->setHeaderData(9, Qt::Horizontal, QObject::tr("Adresse"));
       model->setHeaderData(10, Qt::Horizontal, QObject::tr("Date de naissance"));
 
+    return model;
     return model;
  }
 

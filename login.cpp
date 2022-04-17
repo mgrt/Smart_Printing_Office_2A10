@@ -94,7 +94,7 @@ void login::on_forgotNext_clicked()
         if(count == 1){
             Smtp* smtp = new Smtp(ui->mail_sprint->text(),ui->mdp_sprint->text(),ui->smtp_gmail->text(),ui->port_smtp->text().toUShort());
             connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
-            smtp->sendMail(ui->mail_sprint->text(),email,"votre code de recuperation","votre code est 12345");
+            smtp->sendMail(ui->mail_sprint->text(),email,"votre code de recuperation","votre code est 95863");
             ui->code->show();
             ui->newmdp1->show();
             ui->newmdp2->show();
@@ -116,7 +116,7 @@ void login::on_loginForgot_clicked()
             mdp_2 = ui->newmdp2->text(),
             code = ui->code->text(),
             emailf = emailforgot;
-    if(code == "12345"){
+    if(code == "95863"){
         if(mdp_1 == mdp_2){
             QSqlQueryModel *m=new QSqlQueryModel();
             m->setQuery("UPDATE employee SET mdp='"+ mdp_1 +"' WHERE email='"+ emailf +"'");

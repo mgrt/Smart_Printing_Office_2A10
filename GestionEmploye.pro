@@ -17,6 +17,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    arduino.cpp \
     chatconnection.cpp \
     connection.cpp \
     employe.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     smtp.cpp
 
 HEADERS += \
+    arduino.h \
     chatconnection.h \
     connection.h \
     employe.h \

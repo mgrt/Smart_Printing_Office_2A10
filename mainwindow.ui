@@ -158,6 +158,577 @@ min-width: 60px;
        <string>Mot de passe oublié</string>
       </property>
      </widget>
+     <widget class="QWidget" name="widget_2" native="true">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>130</y>
+        <width>301</width>
+        <height>311</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(193, 193, 193);
+border-width: 1px;
+border-radius: 15;</string>
+      </property>
+      <widget class="QPushButton" name="close_door_arduino">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>260</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}</string>
+       </property>
+       <property name="text">
+        <string>Fermer</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="open_door_arduino_2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>260</y>
+         <width>81</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>14</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}
+QPushButton:hover {
+color: white;
+background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border-width: 1px;
+border-color: #339;
+border-style: solid;
+border-radius: 10;
+padding: -16px 0px;
+min-height: 32px;
+min-width: 60px;	
+}</string>
+       </property>
+       <property name="text">
+        <string>Ouvrir</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_34">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>200</y>
+         <width>141</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>16</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: white;
+	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
+border: 2px solid white;
+border-radius: 8px;
+padding: 2px 4px;</string>
+       </property>
+       <property name="text">
+        <string>Etat de porte :</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="etat_porte">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>200</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>20</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+background-color: rgb(243, 236, 23);
+border: 2px solid black;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_35">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <property name="text">
+        <string>CIN</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_36">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Nom</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_37">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>71</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Prenom</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_38">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Numero Telephone</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_39">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>130</y>
+         <width>81</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <property name="text">
+        <string>adresse</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_40">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>160</y>
+         <width>51</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	color: rgb(0, 0, 0);
+	background-color: rgb(243, 236, 23);
+border: 2px solid;
+border-radius: 8px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Sexe</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="cin_arduino">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>10</y>
+         <width>161</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+       </property>
+       <property name="maxLength">
+        <number>8</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="nom_arduino">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>40</y>
+         <width>161</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+       </property>
+       <property name="maxLength">
+        <number>300</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="prenom_arduino">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>70</y>
+         <width>161</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+       </property>
+       <property name="maxLength">
+        <number>300</number>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="tel_arduino">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>100</y>
+         <width>121</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLineEdit {
+background-color: rgb(255, 255, 255);
+padding: 1px;
+border-style: solid;
+border: 2px solid black;
+border-radius: 8px;
+}</string>
+       </property>
+       <property name="maxLength">
+        <number>8</number>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="sexe_arduino">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>160</y>
+         <width>161</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+	
+border: 2px solid;
+border-radius: 15px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Homme</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Femme</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>autre</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="adresse_arduino">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>130</y>
+         <width>191</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+
+border: 2px solid;
+border-radius: 15px;
+padding: 2px 4px;
+}</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>Ariana</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Béja</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ben Arous</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bizerte	</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Gabès</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Gafsa</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Jendouba</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Kairouan</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Kasserine</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Kébili</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Le Kef</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mahdia</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>La Manouba</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Médenine</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Monastir</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Nabeul</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sfax</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sidi Bouzid</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Siliana	</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Sousse</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tataouine</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tozeur</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Tunis</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Zaghouan</string>
+        </property>
+       </item>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="ajout">
      <attribute name="title">
@@ -632,6 +1203,7 @@ border-radius: 8px;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>13</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -815,6 +1387,7 @@ padding: 2px 4px;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>13</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1026,7 +1599,7 @@ padding: 2px 4px;
        <rect>
         <x>110</x>
         <y>80</y>
-        <width>461</width>
+        <width>551</width>
         <height>31</height>
        </rect>
       </property>
@@ -1067,6 +1640,7 @@ padding: 2px 4px;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>33</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1093,6 +1667,7 @@ font: 33pt &quot;Bahnschrift&quot;;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>13</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1172,43 +1747,6 @@ border-radius: 8px;
        <string>tapez le cin de l'employe</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="recherche_button">
-      <property name="geometry">
-       <rect>
-        <x>580</x>
-        <y>80</y>
-        <width>91</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-        <italic>false</italic>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton {
-color: white;
-
-background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.0147059 rgba(214, 37, 170, 255), stop:0.936275 rgba(182, 69, 154, 255));
-border-color: #339;
-border-style: solid;
-font: 12pt &quot;Bahnschrift&quot;;
-}
-QPushButton:hover {
-color: white;
-	background-color: qlineargradient(spread:pad, x1:0.122, y1:0.988636, x2:0.118, y2:0, stop:0.00490196 rgba(255, 0, 191, 255), stop:0.696078 rgba(174, 72, 150, 255), stop:1 rgba(242, 242, 242, 255));
-border-color: #339;
-border-style: solid;
-font: 12pt &quot;Bahnschrift&quot;;
-}</string>
-      </property>
-      <property name="text">
-       <string>Rechercher</string>
-      </property>
-     </widget>
      <widget class="QComboBox" name="tri_comboBox">
       <property name="geometry">
        <rect>
@@ -1255,6 +1793,7 @@ font: 12pt &quot;Bahnschrift&quot;;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>11</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1302,6 +1841,7 @@ font: 11pt &quot;Bahnschrift&quot;;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>11</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1349,6 +1889,7 @@ font: 11pt &quot;Bahnschrift&quot;;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>13</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1552,6 +2093,7 @@ border-radius: 8px;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>14</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -1645,6 +2187,7 @@ border-radius: 8px;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>14</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -2224,6 +2767,7 @@ padding: 2px 4px;
       </property>
       <property name="font">
        <font>
+        <family>Bahnschrift</family>
         <pointsize>33</pointsize>
         <italic>false</italic>
         <bold>false</bold>
@@ -2275,7 +2819,7 @@ font: 14pt &quot;Bahnschrift&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: #0000;
+       <string notr="true">background-color: rgb(202, 202, 202);
  border: none;
 border-radius: 10px;
 icon-size: 30px;
@@ -2292,7 +2836,7 @@ font: 14pt &quot;Bahnschrift&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: #0000;
+       <string notr="true">background-color: rgb(255, 255, 255);
 border: none;
 border-radius: 10px;
 icon-size: 30px;
@@ -2331,7 +2875,7 @@ font: 14pt &quot;Bahnschrift&quot;;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: #0000;
+       <string notr="true">background-color: rgb(202, 202, 202);
  border: none;
 border-radius: 10px;
 icon-size: 30px;

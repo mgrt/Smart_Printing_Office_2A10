@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "employe.h"
+#include "arduino.h"
 #include <QMainWindow>
 #include <QDialog>
 #include <QSqlDatabase>
@@ -28,13 +29,16 @@ public:
     ~MainWindow();
 
 private slots:
+
+
+
     void on_pb_ajouter_clicked();
 
     void on_pb_supprimer_clicked();
 
     void on_modifier_clicked();
 
-    void on_recherche_button_clicked();
+    /*void on_recherche_button_clicked();*/
 
     void on_annuler_clicked();
 
@@ -68,9 +72,25 @@ private slots:
 
 
 
+    void on_barre_recherche_textChanged(const QString &arg1);
+    void serial_read();
+    void update_label();
+    void on_open_door_arduino_2_clicked();
+
+    void on_close_door_arduino_clicked();
+
 private:
     Ui::MainWindow *ui;
     Employe e;
     QTcpSocket *mSocket;
+    QSerialPort *serial;
+    QString portname;
+    quint16 vendorId;
+    quint16 productId;
+    bool arduino_available;
+    void arduino_init();
+    QByteArray data;
+    QString serialBuffer;
+    Arduino A;
 };
 #endif // MAINWINDOW_H

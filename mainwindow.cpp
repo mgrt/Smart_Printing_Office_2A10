@@ -65,16 +65,16 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-       /* mSocket->connectToHost("localhost",2000);
-        if (mSocket->waitForConnected(3000))
-        {
-            ui->plainTextEdit_chat->appendPlainText("se connecter correctement");
+        int ret=A.connect_arduino(); // lancer la connexion à arduino
+        switch(ret){
+        case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+            break;
+        case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+           break;
+        case(-1):qDebug() << "arduino is not available";
         }
-        else
-        {
-            ui->plainTextEdit_chat->appendPlainText("pas de connexion");
-        }
-        connect(mSocket,SIGNAL(readyRead()),this,SLOT(leer()));*/
+         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+         //le slot update_label suite à la reception du signal readyRead (reception des données).
 
 }
 
@@ -82,6 +82,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 
 void MainWindow::on_pb_ajouter_clicked()
@@ -224,7 +225,7 @@ void MainWindow::on_modifier_clicked()
 
 
 
-void MainWindow::on_recherche_button_clicked()
+/*void MainWindow::on_recherche_button_clicked()
 {
     Employe E;
     QString mot=ui->barre_recherche->text();
@@ -240,8 +241,12 @@ void MainWindow::on_recherche_button_clicked()
                                  QMessageBox::Cancel);
 
     }
+}*/
+void MainWindow::on_barre_recherche_textChanged(const QString &arg1)
+{
+    Employe e;
+    ui->tab_employe->setModel( e.recherche(arg1));
 }
-
 void MainWindow::on_annuler_clicked()
 {
     ui->id_box->clear();
@@ -529,7 +534,7 @@ void MainWindow::on_tri_button_desc_clicked()
 
 void MainWindow::on_imprimer_button_clicked()
 {
-    QString strStream;
+    /*QString strStream;
         QTextStream out(&strStream);
 
         const int rowCount = ui->tab_employe->model()->rowCount();
@@ -577,7 +582,81 @@ void MainWindow::on_imprimer_button_clicked()
             document->print(&printer);
         }
 
+        delete document;*/
+    QSqlDatabase db;
+                   QTableView table_menu;
+                   QSqlQueryModel * Modal=new  QSqlQueryModel();
+                   QSqlQuery qry;
+                    qry.prepare("SELECT * FROM employee");
+                    qry.exec();
+                    Modal->setQuery(qry);
+                    table_menu.setModel(Modal);
+                    db.close();
+                    QString strStream;
+                    QTextStream out(&strStream);
+                    const int rowCount = table_menu.model()->rowCount();
+                    const int columnCount =  table_menu.model()->columnCount();
+                    const QString strTitle ="Document";
+ out <<  "<html>\n"
+ "<img src='C:/Users/Islem/Documents/GestionEmploye/img/logo sprint.png' height='120' width='120'/>"
+ "<head>\n"
+ "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+  <<  QString("<title>%1</title>\n").arg(strTitle)
+  <<  "</head>\n"
+   "<body bgcolor=#ffffff link=#5000A0>\n"
+  << QString("<h3 style=\" font-size: 50px; font-family: Arial, Helvetica, sans-serif; color: #e80e32; font-weight: lighter; text-align: center;\">%1</h3>\n").arg("LISTE DES EMPLOYES")
+  <<"<br>"
+
+ <<"<table border=1 cellspacing=0 cellpadding=2 width=\"100%\">\n";
+  out << "<thead><tr bgcolor=#f0f0f0>";
+  for (int column = 0; column < columnCount; column++)
+   if (!table_menu.isColumnHidden(column))
+  out << QString("<th>%1</th>").arg(table_menu.model()->headerData(column, Qt::Horizontal).toString());
+  out << "</tr></thead>\n";
+
+  for (int row = 0; row < rowCount; row++) {
+  out << "<tr>";
+  for (int column = 0; column < columnCount; column++) {
+  if (!table_menu.isColumnHidden(column)) {
+    QString data = table_menu.model()->data(table_menu.model()->index(row, column)).toString().simplified();
+  out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+   }
+   }
+  out << "</tr>\n";
+   }
+  out <<  "</table>\n"
+   "<br><br>"
+     <<"<br>"
+   <<"<table border=1 cellspacing=0 cellpadding=2>\n";
+   out << "<thead><tr bgcolor=#f0f0f0>";
+   out <<  "</table>\n"
+   "</body>\n"
+   "</html>\n";
+
+   QTextDocument *document = new QTextDocument();
+      document->setHtml(strStream);
+      QPrinter printer(QPrinter::PrinterResolution);
+        QPrintDialog *dialog = new QPrintDialog(&printer, NULL);
+          if (dialog->exec() == QDialog::Accepted)
+          {
+           document->print(&printer);
+        }
+
         delete document;
+
+
+   QString fileName = QFileDialog::getSaveFileName((QWidget* )0, "Sauvegarder en PDF", QString(), "*.pdf");
+   if (QFileInfo(fileName).suffix().isEmpty()) { fileName.append(".pdf"); }
+
+   printer.setOutputFormat(QPrinter::PdfFormat);
+   printer.setPaperSize(QPrinter::A4);
+   printer.setOutputFileName(fileName);
+   printer.setPageMargins(QMarginsF(15, 15, 15, 15));
+
+   QTextDocument doc;
+   doc.setHtml(strStream);
+   doc.setPageSize(printer.pageRect().size()); // This is necessary if you want to hide the page number
+   doc.print(&printer);
 
 }
 
@@ -623,5 +702,80 @@ void MainWindow::on_pb_connecter_clicked()
  mSocket->connectToHost(CH.hostname(),CH.port());
 
 
+}
+
+void MainWindow::serial_read()
+{
+    if(serial->isReadable()&&arduino_available)
+    {
+
+     data = serial->readAll();
+     serialBuffer +=QString::fromStdString(data.toStdString());
+        qDebug()<<serialBuffer;
+
+    }
+}
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+
+QSqlQuery query;
+
+    if(data=="1")
+   {
+        ui->etat_porte->setText("Ouvert");
+       query.prepare("select * from employee where carte_id like '"+serialBuffer+"%'");
+
+       if(query.exec())
+       {
+           while(query.next())
+           {
+              ui->cin_arduino->setText(query.value(0).toString());
+              ui->nom_arduino->setText(query.value(1).toString());
+              ui->prenom_arduino->setText(query.value(2).toString());
+              ui->tel_arduino->setText(query.value(3).toString());
+              ui->sexe_arduino->setCurrentText(query.value(7).toString());
+              ui->adresse_arduino->setCurrentText(query.value(9).toString());
+
+           }
+       }
+       //A.write_to_arduino(ui->prenom_arduino->text());
+
+     }
+   else if (data=="0" || data=="3")
+         {
+        ui->etat_porte->setText("Fermée");  // si les données reçues de arduino via la liaison série sont égales à 0
+     //alors afficher fermee
+
+        ui->cin_arduino->clear();
+        ui->nom_arduino->clear();
+        ui->prenom_arduino->clear();
+        ui->tel_arduino->clear();
+
+
+
+
+    }
+   else{
+      ui->etat_porte->setText("Ouvert");
+      ui->cin_arduino->clear();
+      ui->nom_arduino->clear();
+      ui->prenom_arduino->clear();
+      ui->tel_arduino->clear();
+
+    }
+}
+
+
+void MainWindow::on_open_door_arduino_2_clicked()
+{
+    A.write_to_arduino("2");
+}
+
+
+void MainWindow::on_close_door_arduino_clicked()
+{
+   A.write_to_arduino("3");
 }
 
