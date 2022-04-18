@@ -6,6 +6,7 @@
 #include <QSqlQueryModel>
 #include <QStandardItemModel>
 #include "stocks.h"
+#include "arduino.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,6 +22,7 @@ public:
 
 
 private slots:
+    void update_label();
  int rech(QString tab[],QCharRef c);
  int decod(int a,int b,int dec);
 void aff();
@@ -105,12 +107,32 @@ void aff();
 
     void on_pushButton_ref_5_clicked();
 
+    void on_pushButton_ref_6_clicked();
+
+
+
+    void on_tri_currentIndexChanged(const QString &arg1);
+
+    void on_pushButton_5_clicked();
+
+    void on_on_clicked();
+
+    void on_off_clicked();
+
+    void on_plus_clicked();
+
+    void on_mins_clicked();
+
 signals:
    void test();
 
 private:
     Ui::MainWindow *ui;
     Stocks *Stock;
+    void sendMail();
+    void mailSent(QString);
+    QByteArray data;
+    Arduino A;
 public:
     bool pls=false;
  // QStandardItemModel *model;

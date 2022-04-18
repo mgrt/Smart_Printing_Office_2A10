@@ -22,6 +22,7 @@ private:
     int Quantite;
    QString image;
    int stat;
+   int vide;
 
 public:
     Stocks();
@@ -33,6 +34,7 @@ public:
     int get_prix(){return prix;}
     int get_Quantite(){return Quantite;}
     int get_stat(){return stat;}
+    void set_vide(int vid){this->vide=vid;}
 void ajouter();
    QSqlQueryModel *afficher();
    QSqlQueryModel *Tri(QString x);

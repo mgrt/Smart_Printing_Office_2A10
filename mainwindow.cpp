@@ -8,7 +8,7 @@
 #include <QtPrintSupport/QPrintDialog>
 #include<QtPrintSupport/QPrinter>
 #include<QPropertyAnimation>
-
+#include "smtp.h"
 #include <QtPrintSupport/QPrinterInfo>
 #include <QtPrintSupport/QPrintDialog>
 #include <QFileDialog>
@@ -43,10 +43,63 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(this, SIGNAL(test()),this, SLOT(aff()));
 
+    int ret=A.connect_arduino(); // lancer la connexion à arduino
+    switch(ret){
+    case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+        break;
+    case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+       break;
+    case(-1):qDebug() << "arduino is not available";
+    }
+     QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+     //le slot update_label suite à la reception du signal readyRead (reception des données).
+
+}
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+   // std::cout<<QString::QByteArray(data);
+
+    if(data=="1"){
+
+     //   ui->label_91->setText("Store open"); // si les données reçues de arduino via la liaison série sont égales à 1
+    // alors afficher ON
+ui->line_nom_5->setText("Porte ouvert");}
+    else if (data=="0"){
+ //A.write_to_arduino("0");
+ui->line_nom_5->setText("Base de Donnees modifier");
+
+Stocks *a =new Stocks();
+
+
+   a->count("select id from Stocks where vide like 0");
+       QString vid= QString::number(a->get_stat());
+QSqlQuery query;
+
+
+
+query.prepare("UPDATE Stocks SET QUANTITE = 30,VIDE = 1 WHERE ID like '"+vid+"'");
+
+      query.exec();
+
+      ui->tableView->setModel(a->Tri("select * from Stocks "));
 
 
 
 
+
+
+
+
+
+    }
+    else if (data=="3"){
+
+ui->line_nom_5->setText("Validation de l'employe");
+  //      ui->label_91->setText("Store closed");   // si les données reçues de arduino via la liaison série sont égales à 0
+     //alors afficher ON
+    }
 
 }
 
@@ -181,13 +234,6 @@ void MainWindow::aff()
                 fossilData.push_back(query.value(0).toDouble()/10);
             }
 
-/*
-    QSqlQuery query1("SELECT quantite FROM stocks");
-            while(query1.next())
-            {
-                test.push_back(query.value(0).toString());
-            }
-*/
 
 
 
@@ -364,6 +410,14 @@ void MainWindow::on_pushButton_3_clicked()
 {
     Stocks *Stock =new Stocks(ui->line_nom->text(),ui->line_idcat->currentText().toInt(),ui->line_prix->text().toInt(),ui->line_quant->text().toInt());
     QItemSelectionModel *selection = ui->tableView->selectionModel();
+    if(ui->line_quant->text().toInt()<=5)
+    {
+        Stock->set_vide(0);
+    }
+    else
+    {
+         Stock->set_vide(1);
+    }
     if(selection->hasSelection())
     {
      QModelIndexList listeSelections = selection->selectedIndexes();
@@ -901,4 +955,210 @@ void MainWindow::on_line_rech_textChanged(const QString &arg1)
 void MainWindow::on_pushButton_ref_5_clicked()
 {
 
+    Stocks *Stock =new Stocks();
+    ui->tableView->setModel(Stock->Tri("select *from Stocks "));
+
+    QLinearGradient gradient(0, 0, 0, 400);
+    gradient.setColorAt(0, QColor(90, 90, 90));
+    gradient.setColorAt(0.38, QColor(105, 105, 105));
+    gradient.setColorAt(1, QColor(70, 70, 70));
+    ui->customPlot->setBackground(QBrush(gradient));
+
+    // create empty bar chart objects:
+    QCPBars *regen = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+    QCPBars *nuclear = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+    QCPBars *fossil = new QCPBars(ui->customPlot->xAxis, ui->customPlot->yAxis);
+    regen->setAntialiased(false); // gives more crisp, pixel aligned bar borders
+    nuclear->setAntialiased(false);
+    fossil->setAntialiased(false);
+    regen->setStackingGap(1);
+    nuclear->setStackingGap(1);
+    fossil->setStackingGap(1);
+    // set names and colors:
+    fossil->setName("Quantiter /10");
+    fossil->setPen(QPen(QColor(111, 9, 176).lighter(170)));
+    fossil->setBrush(QColor(111, 9, 176));
+
+    nuclear->setPen(QPen(QColor(250, 170, 20).lighter(150)));
+    nuclear->setBrush(QColor(250, 170, 20));
+
+    regen->setPen(QPen(QColor(0, 168, 140).lighter(130)));
+    regen->setBrush(QColor(0, 168, 140));
+    // stack bars on top of each other:
+    nuclear->moveAbove(fossil);
+    regen->moveAbove(nuclear);
+
+    // prepare x axis with country labels:
+    QVector<double> ticks;
+    QVector<QString> labels,test;
+
+   Stocks *aa =new Stocks();
+     aa->count("select count(*) from stocks");
+    // nbr=Stock->get_prix();
+     for(int i=1;i<=aa->get_stat();i++)
+     {
+       ticks.push_back(i);
+     }
+
+    QSqlQuery query1("SELECT nom_produit FROM stocks ");
+            while(query1.next())
+            {
+                labels.push_back(query1.value(0).toString());
+            }
+
+
+
+
+
+  //ticks << 1 << 2 << 3 ;
+   // labels << "USA" << "Japan" << "Germany" << "France" << "UK" ;
+    //labels.push_back("teeeeeeeeeeeest");
+    QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
+    textTicker->addTicks(ticks, labels);
+    ui->customPlot->xAxis->setTicker(textTicker);
+    ui->customPlot->xAxis->setTickLabelRotation(60);
+    ui->customPlot->xAxis->setSubTicks(false);
+    ui->customPlot->xAxis->setTickLength(0, 4);
+    ui->customPlot->xAxis->setRange(0, 8);
+    ui->customPlot->xAxis->setBasePen(QPen(Qt::white));
+    ui->customPlot->xAxis->setTickPen(QPen(Qt::white));
+    ui->customPlot->xAxis->grid()->setVisible(true);
+    ui->customPlot->xAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+    ui->customPlot->xAxis->setTickLabelColor(Qt::white);
+    ui->customPlot->xAxis->setLabelColor(Qt::white);
+
+    // prepare y axis:
+    ui->customPlot->yAxis->setRange(0, 12.1);
+    ui->customPlot->yAxis->setPadding(5); // a bit more space to the left border
+    ui->customPlot->yAxis->setLabel("Power Consumption in\nKilowatts per Capita (2007)");
+    ui->customPlot->yAxis->setBasePen(QPen(Qt::white));
+    ui->customPlot->yAxis->setTickPen(QPen(Qt::white));
+    ui->customPlot->yAxis->setSubTickPen(QPen(Qt::white));
+    ui->customPlot->yAxis->grid()->setSubGridVisible(true);
+    ui->customPlot->yAxis->setTickLabelColor(Qt::white);
+    ui->customPlot->yAxis->setLabelColor(Qt::white);
+    ui->customPlot->yAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::SolidLine));
+    ui->customPlot->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+
+    // Add data:
+    QVector<double> fossilData, nuclearData, regenData;
+    QSqlQuery query("SELECT quantite FROM stocks ");
+            while(query.next())
+            {
+                fossilData.push_back(query.value(0).toDouble()/10);
+            }
+
+
+
+
+              fossil->setData(ticks,fossilData);
+//fossilData<<55<<44<<55;
+
+   // nuclear->setData(ticks, nuclearData);
+ //   regen->setData(ticks, regenData);
+
+    // setup legend:
+    ui->customPlot->legend->setVisible(true);
+    ui->customPlot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
+    ui->customPlot->legend->setBrush(QColor(255, 255, 255, 100));
+    ui->customPlot->legend->setBorderPen(Qt::NoPen);
+    QFont legendFont = font();
+    legendFont.setPointSize(10);
+    ui->customPlot->legend->setFont(legendFont);
+    ui->customPlot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
  }
+
+void MainWindow::on_pushButton_ref_6_clicked()
+{
+   // Smtp* smtp = new Smtp("atlantesgrt@gmail.com","AZE123456", "smtp.gmail.com");
+   // connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+// smtp->sendMail("atlantesgrt@gmail.com"," malek.gritli@esprit.tn" , "ff","fffff");
+}
+
+
+
+void MainWindow::on_tri_currentIndexChanged(const QString &arg1)
+{
+    Stocks *Stock =new Stocks();
+
+
+        if(ui->tri->currentText()=="Nom")
+        {
+              ui->tableView->setModel(Stock->Tri("select *from Stocks order by NOM_PRODUIT"));
+        }
+      if(ui->tri->currentText()=="Nom dec")
+        {
+          ui->tableView->setModel(Stock->Tri("select *from Stocks order by NOM_PRODUIT desc"));
+      }
+      if(ui->tri->currentText()=="Prix")
+        {
+          ui->tableView->setModel(Stock->Tri("select *from Stocks order by PRIX"));
+      }
+      if(ui->tri->currentText()=="Prix dec")
+        {
+          ui->tableView->setModel(Stock->Tri("select *from Stocks order by PRIX DESC"));
+      }
+      if(ui->tri->currentText()=="Quantiter")
+        {
+          ui->tableView->setModel(Stock->Tri("select *from Stocks order by QUANTITE"));
+      }
+      if(ui->tri->currentText()=="Quantiter dec")
+        {
+          ui->tableView->setModel(Stock->Tri("select *from Stocks order by QUANTITE DESC"));
+      }
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{Stocks *Stock =new Stocks();
+    Stocks *a =new Stocks();
+      ui->tableView->setModel(Stock->Tri("select *from Stocks where vide like 0"));
+      Stock->count("select count(*) from Stocks where vide like 0");
+      if(Stock->get_stat()!=0)
+      {
+          A.write_to_arduino("1");
+      }
+       a->count("select id from Stocks where vide like 0");
+           QByteArray vid= QByteArray::number(a->get_stat());
+        //   ui->line_prix->setText(vid);
+       A.write_to_arduino(vid);
+}
+
+
+void  MainWindow::sendMail()
+{
+    Smtp* smtp = new Smtp("atlantesgrt@gmail.com","AZE123456", "smtp.gmail.com");
+    connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+
+
+        smtp->sendMail("atlantesgrt@gmail.com","mohamedamine.eloudi@esprit.tn" ,"rr","rrr");
+}
+
+void  MainWindow::mailSent(QString status)
+{
+
+    if(status == "Message sent")
+        QMessageBox::warning( nullptr, tr( "Qt Simple SMTP client" ), tr( "Message sent!\n\n" ) );
+
+}
+
+void MainWindow::on_on_clicked()
+{
+       A.write_to_arduino("1");
+}
+
+
+void MainWindow::on_off_clicked()
+{
+       A.write_to_arduino("0");
+}
+
+void MainWindow::on_plus_clicked()
+{
+       A.write_to_arduino("2");
+}
+
+void MainWindow::on_mins_clicked()
+{
+       A.write_to_arduino("3");
+}
+
