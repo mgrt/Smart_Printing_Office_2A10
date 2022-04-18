@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>img/labrador.jpg</file>
+        <file>img/logo sprint.png</file>
+        <file>img/Mode-nuit-featured.png</file>
+        <file>img/Darkeum.qss</file>
+        <file>img/Integrid.qss</file>
+    </qresource>
+</RCC>
