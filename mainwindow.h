@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "arduino.h"
 #include <QQuickView>
 #include "maintenance.h"
 #include "machine.h"
@@ -107,11 +108,22 @@ private slots:
 
     void on_recherche_textChanged(const QString &arg1);
 
+
+    void on_checkBox_toggled(bool checked);
+
+    void on_nom_produit_currentTextChanged(const QString &arg1);
+
+    void recup();
+
 private:
+
+        QString nbf ;
     int trie=-1 ;
     Maintenance M ;
     Machine MM ;
     Ui::MainWindow *ui;
     QQuickView *qmlView;
+    arduino A ;
+     QByteArray data;
 };
 #endif // MAINWINDOW_H

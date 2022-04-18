@@ -137,3 +137,23 @@ bool Maintenance::supprimer(int id )
     return  query.exec();
 
 }
+
+
+QSqlQueryModel *Maintenance::afficher_nom_produit()
+    {
+        QSqlQueryModel * model=new QSqlQueryModel();
+    model->setQuery("select NOM_PRODUIT from Stocks");
+   model->setHeaderData(0,Qt::Horizontal,"NOM_PRODUIT");
+
+    return model;
+    }
+int Maintenance::poids(const QString nom)
+    {
+    QSqlQuery query ;
+    query.prepare("select poids from Stocks where NOM_PRODUIT= :id ");
+    query.bindValue(":id",nom);
+    query.exec();
+    query.next();
+
+    return query.value(0).toInt();
+    }

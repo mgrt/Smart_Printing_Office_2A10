@@ -12,15 +12,15 @@ int main(int argc, char *argv[])
     MainWindow w;
     if(test)
     {
-
         w.update_output_data();
-        w.show();
         w.initialisation_demarage();
+        qDebug() <<'test' ;
+        w.show();
+
+
     }
     else
  w.warning();
-
-
 
     return a.exec();
 }

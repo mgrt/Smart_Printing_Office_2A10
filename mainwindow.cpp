@@ -9,19 +9,37 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
         ui->setupUi(this);
         update_output_data();
         controle_de_saisie();
         ui->affichage_maintenance->setSelectionBehavior(QAbstractItemView::SelectRows);
         ui->affichage_maintenance->verticalHeader()->hide();
         ui->affichage_machine->setSelectionBehavior(QAbstractItemView::SelectRows);
-        //ui->affichage_machine->verticalHeader()->hide();
-        //ui->annuler->setStyleSheet("border-image:url(C:/Users/fedi1/Documents/Gestion_de_maintenance/Croix_Mundolsheim.png);");
-
 
         ui->maps->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
         ui->maps->show();
+        ui->papier->setVisible(false);
+        ui->nom_papier_L->setVisible(false);
+        ui->nom_produit->setVisible(false);
+         ui->lcdNumber->setVisible(false);
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////
+        /// arduio
+        int ret=A.connect_arduino(); // lancer la connexion à arduino
+        switch(ret){
+        case(0) :qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+            break;
+        case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+           break;
+        case(-1):qDebug() << "arduino is not available";
+        }
+         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(recup())); // permet de lancer
+         //le slot update_label suite à la reception du signal readyRead (reception des données).
+    /// ////////////////////////////////////////////////////////////////////////////////
 
 }
 
@@ -47,12 +65,15 @@ void MainWindow::update_output_data()
     ui->id_maintenance_modif->setModel(M.afficher(trie) );
     ui->id_machine_affchage_3->setModel( MM.afficher_nom() );
     ui->id_machine_modif->setModel(MM.afficher_nom());
+    ui->nom_produit->setModel(M.afficher_nom_produit());
 
 }
+
 ////////////////////////////////////////////////////////////////////////
 /// statistique
 ///
-///
+
+
 void MainWindow::statistique()
 {
 
@@ -229,7 +250,7 @@ void MainWindow::warning ()
 }
 
 ////////////////////
-/// \brief MainWindow::on_pushButton_8_clicked
+///
 /// ajouter une machine
 void MainWindow::on_pushButton_8_clicked()
 {
@@ -261,7 +282,7 @@ void MainWindow::on_pushButton_8_clicked()
 
 
 ////////
-/// \brief MainWindow::on_pushButton_7_clicked
+///
 ///bouton initialisation
 void MainWindow::on_pushButton_9_clicked()
 {
@@ -307,7 +328,7 @@ void MainWindow::on_pushButton_3_clicked()
 }
 
 ////////////////
-/// \brief MainWindow::on_pushButton_5_clicked
+///  MainWindow::on_pushButton_5_clicked
 ///supprimer une machine
 
 void MainWindow::on_pushButton_5_clicked()
@@ -628,4 +649,47 @@ void MainWindow::on_recherche_textChanged(const QString &arg1)
     else
     ui->affichage_maintenance->setModel( M.recherche_par_machine(arg1));
 }
+
+void MainWindow::on_checkBox_toggled(bool checked)
+{
+
+    if(checked)
+    {
+        A.serial_read(nbf) ;
+        ui->papier->setVisible(true);
+        ui->nom_papier_L->setVisible(true);
+        ui->nom_produit->setVisible(true);
+        ui->lcdNumber->setVisible(true);
+        ui->nom_produit->setCurrentIndex(-1);
+        A.write_to_arduino("1");
+    }
+    else{
+        A.write_to_arduino("0");
+        A.write_to_arduino("0");
+        ui->papier->setVisible(false);
+
+        ui->nom_papier_L->setVisible(false);
+        ui->nom_produit->setVisible(false);
+        ui->lcdNumber->setVisible(false);
+    }
+}
+
+
+void MainWindow::on_nom_produit_currentTextChanged(const QString &arg1)
+{
+    A.write_to_arduino("333");
+     int poids;
+     poids=M.poids(arg1);
+     for(int i=0 ; i<=poids ; i++)
+     {
+         A.write_to_arduino("22");
+     }
+
+}
+
+ void MainWindow::recup()
+ {
+     A.serial_read(nbf);
+     ui->lcdNumber->display(nbf);
+ }
 

@@ -48,6 +48,8 @@ public:
      QSqlQueryModel * afficher(int);
      void afficher_une_maintenances(int id,int &id_machine ,QDate &date,QString &desc);
      bool modifier_maintenances(int id );
+     QSqlQueryModel *afficher_nom_produit();
+     int poids(const QString nom);
 
 };
 
