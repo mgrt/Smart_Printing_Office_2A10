@@ -1,33 +1,21 @@
 #include "mainwindow.h"
 #include "connection.h"
-#include <QSystemTrayIcon>
 #include <QApplication>
-#include <QMessageBox>
-#include <QInputDialog>
-#include "test.h"
-#include <iostream>
+
 int main(int argc, char *argv[])
 {
-
     QApplication a(argc, argv);
+    Connection c;
+    bool test=c.createconnection();
     MainWindow w;
 
-    Connection c;
-    bool test=c.ouvrirConnection();
-
     if(test)
-    { std::cout<<"test";
-        emit w.test();
+    {w.show();
+           emit w.test();
 
-        w.show();
-        QSystemTrayIcon *notifyIcon = new QSystemTrayIcon;
-            notifyIcon->show();
-           notifyIcon->showMessage("succèses ","database open",QSystemTrayIcon::Information,15000);
-        QMessageBox::information(nullptr, QObject::tr("database open"),
+        QMessageBox::information(nullptr, QObject::tr("database is open"),
                     QObject::tr("connection successful.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
-
-
 
 
 }
@@ -38,5 +26,5 @@ int main(int argc, char *argv[])
 
 
 
-    return a.exec();}
-
+    return a.exec();
+}

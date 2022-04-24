@@ -21,6 +21,7 @@
      this->prix=prix;
      this->Quantite=quantite;
      this->image=image;
+     this->vide=1;
 
  }
      Stocks::Stocks(QString nom_produit,int id_Categorie,int prix,int quantite)
@@ -38,9 +39,10 @@
     QString i_c= QString::number(id_Categorie);
     QString pri= QString::number(prix);
     QString qua= QString::number(Quantite);
+       QString vid= QString::number(vide);
 
-   query.prepare("INSERT INTO STOCKS (ID,NOM_PRODUIT,ID_CATEGORIE,PRIX,QUANTITE,IMAGE)"
-                        "VALUES (STOCKS_SEQ.nextval,:nom_prod,:id_cat,:prix,:quantite,:image)");
+   query.prepare("INSERT INTO STOCKS (ID,NOM_PRODUIT,ID_CATEGORIE,PRIX,QUANTITE,IMAGE,VIDE)"
+                        "VALUES (STOCKS_SEQ.nextval,:nom_prod,:id_cat,:prix,:quantite,:image,:vid)");
   //   query.bindValue(":id",i_d);
 
         query.bindValue(":nom_prod",Nom_produit);
@@ -48,6 +50,7 @@
               query.bindValue(":prix",pri);
               query.bindValue(":quantite",qua);
                 query.bindValue(":image",image);
+                  query.bindValue(":vid",vid);
          query.exec();
 
 
@@ -80,13 +83,15 @@ return model;
 
       QString pri= QString::number(prix);
       QString qua= QString::number(Quantite);
+      QString vid= QString::number(vide);
 
-     query.prepare("UPDATE Stocks SET NOM_PRODUIT=:nom,PRIX=:prix,QUANTITE=:quan WHERE ID=:ID");
+     query.prepare("UPDATE Stocks SET NOM_PRODUIT=:nom,PRIX=:prix,QUANTITE=:quan,VIDE=:vid WHERE ID=:ID");
           query.bindValue(":ID",id);
           query.bindValue(":nom",Nom_produit);
 
                 query.bindValue(":prix",pri);
                 query.bindValue(":quan",qua);
+                   query.bindValue(":vid",vid);
            query.exec();
 
  }
