@@ -38,6 +38,7 @@ class MainWindow : public QMainWindow
 public:
 
 
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void initialisation_demarage();
@@ -48,37 +49,27 @@ public:
 private slots:
     void on_exit_triggered();
 
-    void on_pushButton_4_clicked();
-
     void on_pushButton_clicked();
 
     void on_pushButton_7_clicked();
-
-    void on_pushButton_12_clicked();
-
-    void on_pushButton_2_clicked();
 
     void on_pushButton_8_clicked();
 
     void on_pushButton_9_clicked();
 
-    void on_pushButton_11_clicked();
-
     void on_pushButton_3_clicked();
 
     void on_pushButton_5_clicked();
 
+
+    void larger(int a, int b, int c);
+
     void on_pushButton_10_clicked();
 
-    void on_pushButton_13_clicked();
 
-    void on_pushButton_18_clicked();
 
-    void on_pushButton_16_clicked();
 
-    void on_pushButton_17_clicked();
 
-    void on_pushButton_19_clicked();
 
     void on_pushButton_6_clicked();
 
@@ -115,9 +106,11 @@ private slots:
 
     void recup();
 
+    void on_pushButton_22_clicked();
+
 private:
 
-        QString nbf ;
+        QString nbf , nbf1 , nbf2 , nbf3  ;
     int trie=-1 ;
     Maintenance M ;
     Machine MM ;

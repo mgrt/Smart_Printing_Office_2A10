@@ -147,6 +147,7 @@ QSqlQueryModel *Maintenance::afficher_nom_produit()
 
     return model;
     }
+
 int Maintenance::poids(const QString nom)
     {
     QSqlQuery query ;

@@ -37,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
            break;
         case(-1):qDebug() << "arduino is not available";
         }
-         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(recup())); // permet de lancer
+         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(/*recup()*/)); // permet de lancer
          //le slot update_label suite à la reception du signal readyRead (reception des données).
     /// ////////////////////////////////////////////////////////////////////////////////
 
@@ -136,49 +136,6 @@ void MainWindow::on_exit_triggered()
     QApplication::quit();
 }
 
-///////////////////////////////////////////////////////////////////////////////////
-//les bouttons du tableau de bord
-
-
-void MainWindow::on_pushButton_4_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_3);
-}
-void MainWindow::on_pushButton_12_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_4);
-}
-void MainWindow::on_pushButton_2_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_2);
-}
-void MainWindow::on_pushButton_11_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_3);
-}
-void MainWindow::on_pushButton_13_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_3);
-}
-void MainWindow::on_pushButton_18_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_7);
-}
-void MainWindow::on_pushButton_16_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_5);
-}
-void MainWindow::on_pushButton_17_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_6);
-}
-void MainWindow::on_pushButton_19_clicked()
-{
-    ui->tabWidget->setCurrentWidget(ui->tab_6);
-}
-
-/////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -189,7 +146,7 @@ void MainWindow::initialisation_demarage()
     on_pushButton_9_clicked();
     on_pushButton_21_clicked();
     on_pushButton_20_clicked();
-    ui->tabWidget->setCurrentWidget(ui->tab_1);
+
 }
 
 ////////////////////////////////////
@@ -656,16 +613,14 @@ void MainWindow::on_checkBox_toggled(bool checked)
     if(checked)
     {
         A.serial_read(nbf) ;
-        ui->papier->setVisible(true);
         ui->nom_papier_L->setVisible(true);
         ui->nom_produit->setVisible(true);
-        ui->lcdNumber->setVisible(true);
         ui->nom_produit->setCurrentIndex(-1);
         A.write_to_arduino("1");
     }
     else{
-        A.write_to_arduino("0");
-        A.write_to_arduino("0");
+        A.write_to_arduino("000");
+
         ui->papier->setVisible(false);
 
         ui->nom_papier_L->setVisible(false);
@@ -677,19 +632,59 @@ void MainWindow::on_checkBox_toggled(bool checked)
 
 void MainWindow::on_nom_produit_currentTextChanged(const QString &arg1)
 {
-    A.write_to_arduino("333");
+    if(ui->checkBox->isChecked() && ui->nom_produit->currentIndex()!= -1)
+    {
+            ui->papier->setVisible(true);
+            ui->lcdNumber->setVisible(true);
+    }
+            A.write_to_arduino("3333");
      int poids;
      poids=M.poids(arg1);
-     for(int i=0 ; i<=poids ; i++)
+     for(int i=0 ; i<=poids+1 ; i++)
      {
-         A.write_to_arduino("22");
+         A.write_to_arduino("2222");
      }
 
 }
 
- void MainWindow::recup()
+void MainWindow::recup()
+{
+    /*if(nbf1.isEmpty())
+    A.serial_read(nbf1);
+   else if(nbf2.isEmpty())
+    A.serial_read(nbf2);
+    else
+    A.serial_read(nbf3);
+   larger(nbf1.toInt() , nbf2.toInt() , nbf3.toInt() ) ;
+
+   if( ! nbf3.isEmpty() )
+   {
+       nbf1.clear();
+   nbf2.clear();
+   nbf3.clear();
+   }*/
+
+    A.write_to_arduino("4444");
+
+    A.serial_read(nbf);
+
+    ui->lcdNumber->display(nbf);
+}
+
+ void MainWindow::larger(int a, int b, int c)
  {
-     A.serial_read(nbf);
-     ui->lcdNumber->display(nbf);
+
+ int max = a;
+
+ if (b > max) max = b;
+ if (c > max) max = c;
+
+ nbf = QString::number(max);
  }
+
+
+void MainWindow::on_pushButton_22_clicked()
+{
+    recup();
+}
 

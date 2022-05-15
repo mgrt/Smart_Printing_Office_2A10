@@ -11,7 +11,7 @@
 #define PIN_LEDV2 8
 #define PIN_CAPTEUR1 10
 #define PIN_CAPTEUR2 9
-#define calibration_factor 14000
+#define calibration_factor 967
 
 char data ;
 long Vcapteur;
@@ -77,9 +77,10 @@ void loop()
       Vcapteur = scale.get_units();
             nbfeuille = Vcapteur / poidsFeuille;  
 
-
+ if(Serial.read()=='4')
   Serial.print(nbfeuille);
-   //Serial.println( poidsFeuille );
+  // Serial.print(poidsFeuille);
+
 
 
       //Serial.write(nbf);
@@ -129,7 +130,7 @@ digitalWrite(PIN_LEDD,HIGH);
                  digitalWrite(PIN_LEDO2,HIGH);  
                  digitalWrite(PIN_LEDV1,HIGH);
                  digitalWrite(PIN_LEDV2,LOW);  
-                }else  if(nbfeuille>22)
+                }else if(nbfeuille>22)
                   {
                  digitalWrite(PIN_LEDR1,HIGH);
                  digitalWrite(PIN_LEDR2,HIGH);

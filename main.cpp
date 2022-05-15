@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     {
         w.update_output_data();
         w.initialisation_demarage();
-        qDebug() <<'test' ;
+
         w.show();
 
 

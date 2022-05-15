@@ -11,7 +11,7 @@ Rectangle{
 
 function addMarker(latitude, longitude)
     {
-        var Component = Qt.createComponent("qrc:/marker.qml")
+        var Component = Qt.createComponent("marker.qml")
         var item = Component.createObject(this, {
                                               coordinate: QtPositioning.coordinate(latitude, longitude)
                                           })
